@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrarse</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="./assets/adomination.png" type="image/png">
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="header-content">
+        <!-- Izquierda: Logo -->
+        <img src="./assets/rose.png" alt="logo" class="logo" width="225" height="225">
+
+        <!-- Centro: Título + Menú -->
+        <div class="titulo-y-menu">
+          <h1 class="titulo">Electronics</h1>
+          <nav>
+            <ul class="user-nav">
+              <li>
+                <a href="./index.html">Home</a>
+                <ul class="submenu">
+                  <li><a href="./productos.html">Productos</a></li>
+                </ul>
+              </li>
+              <li><a href="./InicioSesion.html">Login</a></li>
+              <li><a href="#">Registro</a></li>
+              <li><a href="./Contacto.html">Contacto</a>
+              <li><a href="./carrito.html">Carrito</a>
+                <ul class="submenu">
+                  <li><a href="#">Finalizar compra</a></li>
+                </ul>
+              <li><a href="./introoo.html">Quienes Somos</a>
+            </ul>
+          </nav>
+
+        </div>
+
+        <!-- Derecha: Mensaje de bienvenida -->
+        <div class="bienvenida" id="bienvenida">
+          Bienvenido, Invitado
+        </div>
+
+        <script>
+          const bienvenida = document.getElementById("bienvenida");
+          const usuarioEmail = localStorage.getItem("usuarioEmail");
+
+          // Si hay un email guardado, mostrarlo
+          bienvenida.textContent = usuarioEmail ? "Bienvenido, " + usuarioEmail : "Bienvenido, Invitado";
+        </script>
+
+      </div>
+    </header>
+    <main class="cajaregistro">
+      <h2>Registro</h2>
+      <form id="registro-form" class="registrando">
+        <label>Email</label>
+        <input type="email" name="correo" id="correo" value="" required>
+        <label>Contraseña</label>
+        <input type="password" name="contrasenia" id="contrasenia" value="" required>
+        <button type="submit">Registrar</button>
+      </form>
+      <script>
+        const form = document.getElementById("registro-form");
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault(); // evita recargar
+
+          const email = document.getElementById("correo").value;
+          const password = document.getElementById("contrasenia").value;
+
+          // Guardar en localStorage
+          localStorage.setItem("usuarioEmail", email);
+          localStorage.setItem("usuarioPassword", password);
+
+          alert("¡Registro exitoso!");
+          window.location.href = "./InicioSesion.html"; // ir a login
+        });
+      </script>
+    </main>
+    <footer>
+      <img src="./assets/rose.png" alt="logo" style="width: 165px; height: 165px;">
+      <p>&copy; 2025. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+</body>
+
+</html>

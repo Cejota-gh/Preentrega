@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="./assets/adomination.png" type="image/png">
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <!-- Izquierda: Logo -->
+      <img src="./assets/rose.png" alt="logo" class="logo" width="225" height="225">
+
+      <!-- Centro: Título + Menú -->
+      <div class="titulo-y-menu">
+        <h1 class="titulo">Electronics</h1>
+        <nav>
+          <ul class="user-nav">
+            <li>
+              <a href="./index.html">Home</a>
+              <ul class="submenu">
+                <li><a href="./productos.html">Productos</a></li>
+              </ul>
+            </li>
+            <li><a href="./InicioSesion.html">Login</a></li>
+            <li><a href="./Registro.html">Registro</a></li>
+            <li><a href="#">Contacto</a>
+            <li><a href="./carrito.html">Carrito</a>
+              <ul class="submenu">
+                <li><a href="./resultados.html">Finalizar compra</a></li>
+              </ul>
+            <li><a href="./introoo.html">Quienes Somos</a>
+          </ul>
+        </nav>
+
+      </div>
+
+      <!-- Derecha: Mensaje de bienvenida -->
+      <div class="bienvenida" id="bienvenida">
+        Bienvenido, Invitado
+      </div>
+
+      <script>
+        const bienvenida = document.getElementById("bienvenida");
+        const usuarioEmail = localStorage.getItem("usuarioEmail");
+
+        // Si hay un email guardado, mostrarlo
+        bienvenida.textContent = usuarioEmail ? "Bienvenido, " + usuarioEmail : "Bienvenido, Invitado";
+      </script>
+
+    </div>
+  </header>
+
+  <main>
+    <section class="formulario-contacto">
+      <h2>Contacto</h2>
+      <form action="https://formspree.io/f/xwprjznn" method="POST">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <img src="./assets/rose.png" alt="logo" style="width: 165px; height: 165px;">
+    <p>&copy; 2025. Todos los derechos reservados.</p>
+  </footer>
+</body>
+
+</html>

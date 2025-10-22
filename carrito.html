@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="./assets/adomination.png" type="image/png">
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="header-content">
+        <!-- Izquierda: Logo -->
+        <img src="./assets/rose.png" alt="logo" class="logo" width="225" height="225">
+
+        <!-- Centro: Título + Menú -->
+        <div class="titulo-y-menu">
+          <h1 class="titulo">Electronics</h1>
+          <nav>
+            <ul class="user-nav">
+              <li>
+                <a href="./index.html">Home</a>
+                <ul class="submenu">
+                  <li><a href="./productos.html">Productos</a></li>
+                </ul>
+              </li>
+              <li><a href="./InicioSesion.html">Login</a></li>
+              <li><a href="./Registro.html">Registro</a></li>
+              <li><a href="./Contacto.html">Contacto</a>
+              <li><a href="#">Carrito</a>
+                <ul class="submenu">
+                  <li><a href="./resultados.html">Finalizar compra</a></li>
+                </ul>
+              <li><a href="./introoo.html">Quienes Somos</a>
+            </ul>
+          </nav>
+
+        </div>
+
+        <!-- Derecha: Mensaje de bienvenida -->
+        <div class="bienvenida" id="bienvenida">
+          Bienvenido, Invitado
+        </div>
+
+        <script>
+          const bienvenida = document.getElementById("bienvenida");
+          const usuarioEmail = localStorage.getItem("usuarioEmail");
+
+          // Si hay un email guardado, mostrarlo
+          bienvenida.textContent = usuarioEmail ? "Bienvenido, " + usuarioEmail : "Bienvenido, Invitado";
+        </script>
+
+      </div>
+    </header>
+    <main class="carrito-productos">
+      <h2>Tu Carrito</h2>
+      <ul id="lista-carrito"></ul>
+      <p id="total"></p>
+
+      <script>
+        const listaCarrito = document.getElementById('lista-carrito');
+        const totalElem = document.getElementById('total');
+
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        let total = 0;
+
+        carrito.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = `${item.nombre} - $${item.precio}`;
+          listaCarrito.appendChild(li);
+
+          total += parseInt(item.precio);
+        });
+
+        totalElem.textContent = "Total: $" + total;
+      </script>
+    </main>
+    <footer>
+      <img src="./assets/rose.png" alt="logo" style="width: 165px; height: 165px;">
+      <p>&copy; 2025. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+</body>
+
+</html>

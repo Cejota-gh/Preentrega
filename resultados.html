@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finalización de Compra</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="./assets/adomination.png" type="image/png">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+    }
+
+    header,
+    footer {
+      background-color: black;
+      color: aliceblue;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    /* Centrado de secciones */
+    .resumen-carrito,
+    .formulario-compra {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .resumen-carrito h2,
+    .formulario-compra h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      max-width: 400px;
+    }
+
+    .resumen-carrito ul {
+      list-style: none;
+      padding: 0;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    .resumen-carrito li {
+      text-align: left;
+      margin-bottom: 5px;
+      max-width: 400px;
+    }
+
+    .resumen-carrito p.total {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      max-width: 400px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 80%;
+      max-width: 400px;
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    input,
+    button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Finalización de Compra</h1>
+    <nav class="user-nav">
+      <a href="./index.html" style="color: aliceblue;">Volver a Home</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="resumen-carrito">
+      <h2>Productos en tu carrito</h2>
+      <ul id="lista-carrito"></ul>
+      <p class="total" id="total"></p>
+    </section>
+
+    <section class="formulario-compra">
+      <h2>Datos para finalizar la compra</h2>
+      <form id="form-finalizar">
+        <input type="text" placeholder="Nombre completo" id="nombre" required>
+        <input type="number" placeholder="Numero de tarjeta" id="num" required>
+        <input type="text" placeholder="Dirección" id="direccion" required>
+        <button type="submit">Finalizar Compra</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // Mostrar productos del carrito
+    const listaCarrito = document.getElementById('lista-carrito');
+    const totalElem = document.getElementById('total');
+
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    let total = 0;
+
+    carrito.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.nombre} - $${item.precio}`;
+      listaCarrito.appendChild(li);
+      total += parseInt(item.precio);
+    });
+
+    totalElem.textContent = "Total: $" + total;
+
+    // Finalizar compra
+    const form = document.getElementById('form-finalizar');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      alert(`Gracias ${document.getElementById('nombre').value}!\nTu compra por $${total} ha sido realizada con éxito.`);
+
+      // Limpiar carrito
+      localStorage.removeItem('carrito');
+
+      // Redirigir a home
+      window.location.href = './index.html';
+    });
+  </script>
+</body>
+
+</html>

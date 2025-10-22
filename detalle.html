@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del producto</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="./assets/adomination.png" type="image/png">
+  <style>
+    /* Contenedor principal para footer sticky */
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 20px;
+      background-color: black;
+      color: aliceblue;
+      text-align: center;
+    }
+
+    main.detalle-producto {
+      /* Centrado vertical y horizontal */
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      /* Tamaño al 50% */
+      width: 50%;
+      max-width: 600px;
+      padding: 20px;
+      background-color: blue;
+      /* opcional */
+      border-radius: 8px;
+      gap: 15px;
+      margin: 20px auto;
+      /* separación del header */
+    }
+
+    main.detalle-producto h2 {
+      font-size: 0.7em;
+      margin-bottom: 10px;
+      color: black;
+      text-align: center;
+    }
+
+    main.detalle-producto img.detalle-img {
+      width: 200px;
+      /* 50% de 300px */
+      height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    main.detalle-producto p {
+      font-size: 0.5em;
+      text-align: center;
+    }
+
+    main.detalle-producto h3 {
+      font-size: 0.6em;
+      font-weight: bold;
+    }
+
+    .boton-comprar {
+      padding: 3px 6px;
+      border-radius: 6px;
+      font-size: 0.7em;
+      background-color: aqua;
+      font-weight: bold;
+      text-decoration: none;
+      color: black;
+      box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
+      transition: 0.3s;
+    }
+
+    .boton-comprar:hover {
+      background-color: aquamarine;
+    }
+
+    footer {
+      padding: 1rem;
+      background-color: black;
+      color: aliceblue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Detalle del producto</h1>
+    <nav>
+      <ul class="user-nav">
+        <li><a href="index.html">Volver</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="detalle-producto" class="detalle-producto"></main>
+
+  <footer>
+    <img src="./assets/rose.png" alt="logo" style="width: 50px; height: auto;">
+    <p>&copy; 2025. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // Base de datos simulada
+    const productos = [
+      { id: 1, nombre: "Heladera no frost", imagen: "./assets/heladera.jpg", descripcion: "Heladera Samsung No Frost Inverter RT29K577JS8 308Lts", precio: "$950.000" },
+      { id: 2, nombre: "S25 Ultra", imagen: "./assets/s25_-_ultra_-_256_1.png", descripcion: "Celular Samsung Galaxy S25 Ultra 256GB Titanium Silverblue", precio: "$3.500.000" },
+      { id: 3, nombre: "Galaxy Book3", imagen: "./assets/images.jpg", descripcion: "Notebook Samsung Galaxy Book3 Pro 14 Intel Core I5 12 Núcleos 16gb Graphite", precio: "$1.500.000" },
+      { id: 4, nombre: "Smart TV UHD 4K", imagen: "./assets/images.jpg", descripcion: "Smart TV UHD 4K Samsung 50'' UN50DU7000GCZB", precio: "$900.000" }
+    ];
+
+    // Obtener ID desde la URL
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get("id"));
+
+    // Buscar el producto
+    const producto = productos.find(p => p.id === id);
+
+    // Mostrar datos o error
+    const contenedor = document.getElementById("detalle-producto");
+
+    if (producto) {
+      contenedor.innerHTML = `
+        <h2>${producto.nombre}</h2>
+        <img src="${producto.imagen}" alt="${producto.nombre}" class="detalle-img">
+        <p>${producto.descripcion}</p>
+        <h3>Precio: ${producto.precio}</h3>
+        <a href="./carrito.html" 
+           class="boton-comprar"
+           data-id="${producto.id}"
+           data-nombre="${producto.nombre}"
+           data-precio="${producto.precio.replace(/\D/g, '')}">
+          Comprar💵
+        </a>
+      `;
+
+      // Listener para agregar al carrito
+      const boton = contenedor.querySelector('.boton-comprar');
+      boton.addEventListener('click', (e) => {
+        e.preventDefault();
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.push({
+          id: producto.id,
+          nombre: producto.nombre,
+          precio: producto.precio.replace(/\D/g, '')
+        });
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        alert(producto.nombre + " agregado al carrito!");
+      });
+
+    } else {
+      contenedor.innerHTML = "<p>Producto no encontrado.</p>";
+    }
+  </script>
+</body>
+
+</html>

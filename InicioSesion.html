@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="./assets/adomination.png" type="image/png">
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="header-content">
+        <!-- Izquierda: Logo -->
+        <img src="./assets/rose.png" alt="logo" class="logo" width="225" height="225">
+
+        <!-- Centro: Título + Menú -->
+        <div class="titulo-y-menu">
+          <h1 class="titulo">Electronics</h1>
+          <nav>
+            <ul class="user-nav">
+              <li>
+                <a href="./index.html">Home</a>
+                <ul class="submenu">
+                  <li><a href="./productos.html">Productos</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Login</a></li>
+              <li><a href="./Registro.html">Registro</a></li>
+              <li><a href="./Contacto.html">Contacto</a>
+              <li><a href="./carrito.html">Carrito</a>
+                <ul class="submenu">
+                  <li><a href="./resultados.html">Finalizar compra</a></li>
+                </ul>
+              <li><a href="./introoo.html">Quienes Somos</a>
+            </ul>
+          </nav>
+
+        </div>
+
+        <!-- Derecha: Mensaje de bienvenida -->
+        <div class="bienvenida" id="bienvenida">
+          Bienvenido, Invitado
+        </div>
+
+        <script>
+          const bienvenida = document.getElementById("bienvenida");
+          const usuarioEmail = localStorage.getItem("usuarioEmail");
+
+          // Si hay un email guardado, mostrarlo
+          bienvenida.textContent = usuarioEmail ? "Bienvenido, " + usuarioEmail : "Bienvenido, Invitado";
+        </script>
+
+      </div>
+    </header>
+
+    <section class="cajaregistro">
+      <h2>Login</h2>
+      <form id="login-form" class="registrando">
+        <label for="email-login">Email</label>
+        <input type="email" id="email-login" name="email" required>
+
+        <label for="password-login">Contraseña</label>
+        <input type="password" id="password-login" name="password" required>
+
+        <button type="submit">Iniciar sesión</button>
+      </form>
+    </section>
+
+    <script>
+      const loginForm = document.getElementById("login-form");
+
+      loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById("email-login").value;
+        const password = document.getElementById("password-login").value;
+
+        const storedEmail = localStorage.getItem("usuarioEmail");
+        const storedPassword = localStorage.getItem("usuarioPassword");
+
+        if (email === storedEmail && password === storedPassword) {
+          alert("¡Login exitoso!");
+          window.location.href = "./index.html"; // redirige a home
+        } else {
+          alert("Email o contraseña incorrectos");
+        }
+      });
+    </script>
+
+    <footer>
+      <img src="./assets/rose.png" alt="logo" style="width: 165px; height: 165px;">
+      <p>&copy; 2025. Todos los derechos reservados.</p>
+    </footer>
+
+  </div>
+</body>
+
+</html>

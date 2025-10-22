@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Electronics - Inicio</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="./assets/adomination.png" type="image/png">
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="header-content">
+        <!-- Izquierda: Logo -->
+        <img src="./assets/rose.png" alt="logo" class="logo" width="225" height="225">
+
+        <!-- Centro: Título + Menú -->
+        <div class="titulo-y-menu">
+          <h1 class="titulo">Electronics</h1>
+          <nav>
+            <ul class="user-nav">
+              <li>
+                <a href="#">Home</a>
+                <ul class="submenu">
+                  <li><a href="./productos.html">Productos</a></li>
+                </ul>
+              </li>
+              <li><a href="./InicioSesion.html">Login</a></li>
+              <li><a href="./Registro.html">Registro</a></li>
+              <li><a href="./Contacto.html">Contacto</a>
+              <li><a href="./carrito.html">Carrito</a>
+                <ul class="submenu">
+                  <li><a href="./resultados.html">Finalizar compra</a></li>
+                </ul>
+              <li><a href="./introoo.html">Quienes Somos</a>
+            </ul>
+          </nav>
+
+        </div>
+
+        <!-- Derecha: Mensaje de bienvenida -->
+        <div class="bienvenida" id="bienvenida">
+          Bienvenido, Invitado
+        </div>
+
+        <script>
+          const bienvenida = document.getElementById("bienvenida");
+          const usuarioEmail = localStorage.getItem("usuarioEmail");
+
+          // Si hay un email guardado, mostrarlo
+          bienvenida.textContent = usuarioEmail ? "Bienvenido, " + usuarioEmail : "Bienvenido, Invitado";
+        </script>
+
+      </div>
+    </header>
+
+    <section class="banner">
+
+    </section>
+    <main>
+      <section class="section-productos">
+        <article class="producto">
+          <h2>Heladera no frost</h2>
+          <img src="./assets/heladera.jpg" alt="prod 1" width="250" height="250">
+          <p>RT-29K507JS8 308Lts</p>
+          <h3>$950.000</h3>
+          <a href="./detalle.html?id=1" class="info">Mas info</a>
+          <a href="#" class="compra" data-id="1" data-nombre="Heladera" data-precio="255000">Comprar</a>
+        </article>
+        <article class="producto">
+          <h2>S25 Ultra</h2>
+          <img src="./assets/s25_-_ultra_-_256_1.png" alt="prod 2" width="250" height="250">
+          <p>256GB/6gb/Silver</p>
+          <h3>$1.500.000</h3>
+          <a href="./detalle.html?id=2" class="info">Mas info</a>
+          <a href="#" class="compra" data-id="2" data-nombre="S25 Ultra" data-precio="50000">Comprar</a>
+        </article>
+        <article class="producto">
+          <h2>Galaxy Book3</h2>
+          <img src="./assets/compu.png" alt="prod 3" width="250" height="250">
+          <p>15.6 i3/8gb/256GB/Silver</p>
+          <h3>$1.000.000</h3>
+          <a href="./detalle.html?id=3" class="info">Mas info</a>
+          <a href="#" class="compra" data-id="3" data-nombre="Galaxy Book3" data-precio="150000">Comprar</a>
+        </article>
+        <article class="producto">
+          <h2>Smart TV UDH 4K</h2>
+          <img src="./assets/fd28fc788a516271773cecb1e8f0.webp" alt="prod 4" width="250" height="240">
+          <p>Samsung 50" UN50DU7000GCZB</p>
+          <h3>$900.000</h3>
+          <a href="./detalle.html?id=4" class="info">Mas info</a>
+          <a href="#" class="compra" data-id="4" data-nombre="Samsung 50''" data-precio="350000">Comprar</a>
+        </article>
+
+      </section>
+      <section class="section-comentarios">
+        <div class="comentario">
+          <h4>Juan</h4>
+          <p>"Atencion rapida y efectiva"</p>
+          <h4>Fecha: 20/10/2025</h4>
+        </div>
+        <div class="comentario">
+          <h4>Santino</h4>
+          <p>"Productos de calidad como ya no se consiguen"</p>
+          <h4>Fecha: 21/10/2025</h4>
+        </div>
+        <div class="comentario">
+          <h4>Agus</h4>
+          <p>"Te dan garantia de 2 años y ni la usas"</p>
+          <h4>Fecha: 22/10/2025</h4>
+        </div>
+        <div class="comentario">
+          <h4>Jazmin</h4>
+          <p>"Me compre un scooter(🛵) electrico y vino de maravilla"</p>
+          <h4>Fecha: 22/10/2025</h4>
+        </div>
+      </section>
+    </main>
+    <script>
+      const botonesCompra = document.querySelectorAll('.compra');
+
+      botonesCompra.forEach(boton => {
+        boton.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          const id = boton.getAttribute('data-id');
+          const nombre = boton.getAttribute('data-nombre');
+          const precio = boton.getAttribute('data-precio');
+
+          let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+          // Agregar producto al carrito
+          carrito.push({ id, nombre, precio });
+
+          // Guardar carrito actualizado
+          localStorage.setItem('carrito', JSON.stringify(carrito));
+
+          alert(nombre + " agregado al carrito!");
+        });
+      });
+    </script>
+
+    <footer>
+      <img src="./assets/rose.png" alt="logo" style="width: 165px; height: 165px;">
+      <p>&copy; 2025. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+</body>
+
+</html>

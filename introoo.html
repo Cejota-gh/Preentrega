@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quienes somos</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="./assets/adomination.png" type="image/png">
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="header-content">
+        <!-- Izquierda: Logo -->
+        <img src="./assets/rose.png" alt="logo" class="logo" width="225" height="225">
+
+        <!-- Centro: Título + Menú -->
+        <div class="titulo-y-menu">
+          <h1 class="titulo">Electronics</h1>
+          <nav>
+            <ul class="user-nav">
+              <li>
+                <a href="./index.html">Home</a>
+                <ul class="submenu">
+                  <li><a href="./productos.html">Productos</a></li>
+                </ul>
+              </li>
+              <li><a href="./InicioSesion.html">Login</a></li>
+              <li><a href="./Registro.html">Registro</a></li>
+              <li><a href="./Contacto.html">Contacto</a>
+              <li><a href="./carrito.html">Carrito</a>
+                <ul class="submenu">
+                  <li><a href="./resultados.html">Finalizar compra</a></li>
+                </ul>
+              <li><a href="#">Quienes Somos</a>
+            </ul>
+          </nav>
+
+        </div>
+
+        <!-- Derecha: Mensaje de bienvenida -->
+        <div class="bienvenida" id="bienvenida">
+          Bienvenido, Invitado
+        </div>
+
+        <script>
+          const bienvenida = document.getElementById("bienvenida");
+          const usuarioEmail = localStorage.getItem("usuarioEmail");
+
+          // Si hay un email guardado, mostrarlo
+          bienvenida.textContent = usuarioEmail ? "Bienvenido, " + usuarioEmail : "Bienvenido, Invitado";
+        </script>
+
+      </div>
+    </header>
+    <section class="quienes-somos">
+      <p>Somos rose electronics, una empresa dedicada a la venta de electrodomesticos</p>
+
+      <div class="slider">
+        <button class="prev">&#10094;</button> <!-- Flecha izquierda -->
+        <div class="slides">
+          <img src="./assets/imagen1.png" alt="Imagen 1" class="slide activo">
+          <img src="./assets/imagen2.png" alt="Imagen 2" class="slide">
+          <video class="slide" controls>
+            <source src="./assets/videoplayback (40).mp4" type="video/mp4">
+          </video>
+        </div>
+        <button class="next">&#10095;</button> <!-- Flecha derecha -->
+      </div>
+
+    </section>
+    <script>
+      const slides = document.querySelectorAll('.slide');
+      const prev = document.querySelector('.prev');
+      const next = document.querySelector('.next');
+
+      let index = 0;
+
+      function mostrarSlide(i) {
+        slides.forEach((s, idx) => {
+          s.classList.toggle('activo', idx === i);
+        });
+      }
+
+      prev.addEventListener('click', () => {
+        index = (index - 1 + slides.length) % slides.length;
+        mostrarSlide(index);
+      });
+
+      next.addEventListener('click', () => {
+        index = (index + 1) % slides.length;
+        mostrarSlide(index);
+      });
+
+      // mostrar el primer slide al cargar
+      mostrarSlide(index);
+    </script>
+
+    <footer>
+      <img src="./assets/rose.png" alt="logo" style="width: 165px; height: 165px;">
+      <p>&copy; 2025. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+</body>
+
+</html>
